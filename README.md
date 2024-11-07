@@ -13,15 +13,16 @@ Python 3.7+
 Bibliotecas Python (listadas em requirements.txt)
 Configuração
 Clone o repositório e instale as dependências:
-
+```
 bash
 
 git clone <URL do repositório>
 cd ProducerAndConsumerKafka
 pip install -r requirements.txt
+```
 Docker Compose
 O projeto utiliza um arquivo docker-compose.yml para levantar o ambiente Kafka e Kafka-UI:
-
+```
 yaml
 
 version: '2'
@@ -58,16 +59,19 @@ services:
     environment:
       - KAFKA_CLUSTERS_0_NAME=KafkaCluster
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+```
+
 Para iniciar os serviços, execute:
 
-bash
-docker-compose up -d
+```
+docker-compose up -d  
+```
 A interface Kafka-UI estará disponível em http://localhost:8080.
 
 Configuração de Conexão com Kafka
 A configuração do cliente Kafka é definida no código como um dicionário de parâmetros. Por exemplo:
 
-python
+```
 
 conf = {
     'bootstrap.servers': 'localhost:9092',
@@ -75,28 +79,33 @@ conf = {
     'session.timeout.ms': 6000,
     'auto.offset.reset': 'earliest',
 }
+```
 Este código define o servidor de bootstrap, o ID do grupo de consumidores e outros parâmetros necessários para conexão.
 
 Como Executar
 Producer (Produtor)
 O produtor envia mensagens para o tópico Kafka definido. Para rodar o produtor, execute o script producer.py:
 
-bash
+```
 python producer.py
+```
 Consumer (Consumidor)
 O consumidor escuta o tópico Kafka e processa as mensagens recebidas. Para rodar o consumidor, execute o script consumer.py:
 
-bash
+```
 python consumer.py
+```
 Exemplo de Mensagem
 Uma mensagem JSON é enviada pelo produtor, como:
 
-json
+```
 {"message": "Exemplo de mensagem para Kafka"}
+```
 O consumidor receberá e processará esta mensagem, convertendo o JSON em um dicionário Python.
 
 Erros Comuns
 ConfigException: Ocorre se as configurações de Kafka estiverem incorretas. Verifique o arquivo docker-compose.yml e as configurações de conexão.
 Connection setup timed out: Verifique se o bootstrap.servers está configurado corretamente com o endereço do broker Kafka.
 Contribuição
+
 Para contribuir com este projeto, crie um fork, faça suas alterações em uma nova branch e envie um pull request.
